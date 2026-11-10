@@ -1,30 +1,33 @@
 import { clsx } from 'clsx';
 import { useState, useEffect, useRef } from 'react';
-import { defaultArticleState, type ArticleStateType } from 'src/constants/articleProps';
+import {
+  defaultArticleState,
+  type ArticleStateType,
+  backgroundColors,
+  contentWidthArr,
+  fontColors,
+  fontFamilyOptions,
+  fontSizeOptions,
+} from 'src/constants/articleProps';
 import { ArrowButton } from 'src/ui/arrow-button';
 import { Button } from 'src/ui/button';
+import { RadioGroup } from 'src/ui/radio-group';
+import { Select } from 'src/ui/select';
 import { Separator } from 'src/ui/separator';
-
-import { BackgroundColorSelected } from './ElementForm/BackgroundColorSelected';
-import { FontColorSelected } from './ElementForm/FontColorSelected';
-import { FontSelected } from './ElementForm/FontSelected';
-import { FontSizeSelected } from './ElementForm/FontSizeSelected';
-import { WidthContentSelected } from './ElementForm/WidthContentSelected';
+import { Text } from 'src/ui/text';
 
 import styles from './ArticleParamsForm.module.scss';
 
 type ArticleParamsFormProps = {
   onApply: (state: ArticleStateType) => void;
-  onReset: () => void;
 };
 
 export const ArticleParamsForm = ({
   onApply,
-  onReset,
 }: ArticleParamsFormProps): React.JSX.Element => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [formState, setFormState] = useState<ArticleStateType>(defaultArticleState);
-  const sidebarRef = useRef<HTMLDivElement>(null);
+  const rootRef = useRef<HTMLDivElement>(null);
 
   const toggleSidebar = (): void => {
     setIsFormOpen((isFormOpen) => !isFormOpen);
@@ -36,7 +39,7 @@ export const ArticleParamsForm = ({
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent): void => {
-      if (sidebarRef.current && !sidebarRef.current.contains(e.target as Node)) {
+      if (rootRef.current && !rootRef.current.contains(e.target as Node)) {
         closeSidebar();
       }
     };
@@ -72,7 +75,7 @@ export const ArticleParamsForm = ({
 
   const handleReset = (): void => {
     setFormState(defaultArticleState);
-    onReset();
+    onApply(defaultArticleState);
   };
 
   const updateFormState = <K extends keyof ArticleStateType>(
@@ -83,35 +86,47 @@ export const ArticleParamsForm = ({
   };
 
   return (
-    <>
+    <div ref={rootRef}>
       <ArrowButton isOpen={isFormOpen} onClick={toggleSidebar} />
       <aside
-        ref={sidebarRef}
         className={clsx(styles.container, {
           [styles.container_open]: isFormOpen,
         })}
       >
         <form className={styles.form} onSubmit={handleApply} onReset={handleReset}>
-          <h1 className={styles.form__title}>Задайте Параметры</h1>
-          <FontSelected
+          <Text as="h2" size={31} weight={800} uppercase={true}>
+            Задайте Параметры
+          </Text>
+          <Select
+            title="Шрифт"
             selected={formState.fontFamilyOption}
+            options={fontFamilyOptions}
             onChange={(option) => updateFormState('fontFamilyOption', option)}
           />
-          <FontSizeSelected
+          <RadioGroup
+            title="Размер шрифта"
+            name="size"
             selected={formState.fontSizeOption}
+            options={fontSizeOptions}
             onChange={(option) => updateFormState('fontSizeOption', option)}
           />
-          <FontColorSelected
+          <Select
+            title="Цвет шрифта"
             selected={formState.fontColor}
+            options={fontColors}
             onChange={(option) => updateFormState('fontColor', option)}
           />
           <Separator />
-          <BackgroundColorSelected
+          <Select
+            title="Цвет фона"
             selected={formState.backgroundColor}
+            options={backgroundColors}
             onChange={(option) => updateFormState('backgroundColor', option)}
           />
-          <WidthContentSelected
+          <Select
+            title="Ширина контента"
             selected={formState.contentWidth}
+            options={contentWidthArr}
             onChange={(option) => updateFormState('contentWidth', option)}
           />
           <div className={styles.bottomContainer}>
@@ -120,6 +135,6 @@ export const ArticleParamsForm = ({
           </div>
         </form>
       </aside>
-    </>
+    </div>
   );
 };

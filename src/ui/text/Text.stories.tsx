@@ -10,19 +10,6 @@ export default meta;
 type Story = StoryObj<typeof Text>;
 
 export const SelectStory: Story = {
-  args: {
-    as: 'div',
-    children: {},
-    fontStyle: 'italic',
-    weight: 800,
-    size: 22,
-    dynamic: true,
-    uppercase: true,
-    align: 'left',
-    family: 'ubuntu',
-    dynamicLite: true,
-  },
-
   argTypes: {
     as: {
       options: ['h1', 'h2', 'div', 'span'],

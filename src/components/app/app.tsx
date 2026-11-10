@@ -2,7 +2,6 @@ import { clsx } from 'clsx';
 import { useState } from 'react';
 import { defaultArticleState, type ArticleStateType } from 'src/constants/articleProps';
 
-//import { Article } from '../article/Article';
 import { Article } from '../article';
 import { ArticleParamsForm } from '../article-params-form';
 
@@ -27,10 +26,7 @@ export const App = (): React.JSX.Element => {
         } as CSSProperties
       }
     >
-      <ArticleParamsForm
-        onApply={setPageSelectedOptionsState}
-        onReset={() => setPageSelectedOptionsState(defaultArticleState)}
-      />
+      <ArticleParamsForm onApply={setPageSelectedOptionsState} />
       <Article />
     </main>
   );
