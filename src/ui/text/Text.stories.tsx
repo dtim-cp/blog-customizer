@@ -42,6 +42,7 @@ export const SelectStory: Story = {
       control: { type: 'select' },
     },
   },
+
   render: (args) => {
     return (
       <Text {...args}>
