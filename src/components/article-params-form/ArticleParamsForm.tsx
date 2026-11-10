@@ -1,14 +1,15 @@
-import { BackgroundColorSelected } from '@/components/article-params-form/ElementForm/BackgroundColorSelected';
-import { FontColorSelected } from '@/components/article-params-form/ElementForm/FontColorSelected';
-import { FontSelected } from '@/components/article-params-form/ElementForm/FontSelected';
-import { FontSizeSelected } from '@/components/article-params-form/ElementForm/FontSizeSelected';
-import { WidthContentSelected } from '@/components/article-params-form/ElementForm/WidthContentSelected';
 import { clsx } from 'clsx';
 import { useState, useEffect, useRef } from 'react';
 import { defaultArticleState, type ArticleStateType } from 'src/constants/articleProps';
 import { ArrowButton } from 'src/ui/arrow-button';
 import { Button } from 'src/ui/button';
 import { Separator } from 'src/ui/separator';
+
+import { BackgroundColorSelected } from './ElementForm/BackgroundColorSelected';
+import { FontColorSelected } from './ElementForm/FontColorSelected';
+import { FontSelected } from './ElementForm/FontSelected';
+import { FontSizeSelected } from './ElementForm/FontSizeSelected';
+import { WidthContentSelected } from './ElementForm/WidthContentSelected';
 
 import styles from './ArticleParamsForm.module.scss';
 

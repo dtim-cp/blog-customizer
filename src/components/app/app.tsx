@@ -1,10 +1,10 @@
-import { defaultArticleState, type ArticleStateType } from '@/constants/articleProps.ts';
 import { clsx } from 'clsx';
 import { useState } from 'react';
+import { defaultArticleState, type ArticleStateType } from 'src/constants/articleProps';
 
-import { ArticleParamsForm } from '@components/article-params-form';
-
-import { Article } from '../article/Article';
+//import { Article } from '../article/Article';
+import { Article } from '../article';
+import { ArticleParamsForm } from '../article-params-form';
 
 import type { CSSProperties } from 'react';
 

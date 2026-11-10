@@ -1,4 +1,4 @@
-const path = require('path');
+/*const path = require('path');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 module.exports = {
@@ -12,4 +12,4 @@ module.exports = {
     hot: true,
   },
   plugins: [new ReactRefreshWebpackPlugin()],
-};
+};*/
